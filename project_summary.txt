@@ -1,0 +1,314 @@
+InvestorShield — Final Project Concept
+Page 1
+ ■■ InvestorShield
+ AI-Assisted Financial Scam & Misinformation Risk Analyzer
+ 
+ Final Project Concept & MVP Blueprint
+ 
+Core message: “Before you trust it, check it.”
+InvestorShield helps retail investors identify potential financial scams and misleading investment content before they
+act by analyzing suspicious messages, claims, and URLs, explaining risk indicators, and guiding users toward safer
+verification steps.
+
+InvestorShield — Final Project Concept
+Page 2
+1. The Problem
+Investors increasingly encounter financial content through WhatsApp, Telegram, Instagram, YouTube, SMS,
+websites, investment advertisements, trading groups, and online communities. A first-time investor may not know
+which claims require verification, whether a regulatory authority is genuinely involved, whether a return promise is a
+warning sign, whether a URL has suspicious characteristics, or what to do before transferring money.
+Example suspicious message:
+“SEBI approved investment opportunity. Guaranteed 30% returns every month. Join our
+Telegram group now.”
+2. Our Solution
+InvestorShield acts as a pre-action safety layer. The user does not need to understand cybersecurity or financial
+regulations. They simply provide a message, URL, or financial claim. InvestorShield analyzes the input and produces
+an explainable risk assessment.
+Core principle
+Do not simply say “Scam.” Detect → Explain → Verify → Pause → Act safely.
+3. Complete User Journey
+USER
+  |
+  v
+Paste message / URL / financial claim
+  |
+  v
+INPUT CLASSIFICATION
+  |
+  +--------------------+
+  |                    |
+  v                    v
+MESSAGE                URL
+  |                    |
+  v                    v
+Text Analyzer       URL Analyzer
+  |
+  v
+Claim Analyzer
+  |                    |
+  +---------+----------+
+            |
+            v
+       RISK ENGINE
+            |
+            v
+   EXPLAINABLE ANALYSIS
+      |       |       |
+      v       v       v
+   Risk    Red Flags Claims
+   Score
+            |
+            v
+      SAFE ACTIONS
+            |
+            v
+     VERIFY BEFORE ACTING
+4. What InvestorShield Detects
+A. Financial-return signals
+
+InvestorShield — Final Project Concept
+Page 3
+ Guaranteed returns
+ Fixed returns
+ Assured profits
+ Risk-free investment claims
+ Unrealistic profit claims
+Example: “Guaranteed 30% returns every month.” The system identifies guaranteed-return language as a
+high-severity risk indicator.
+B. Pressure & urgency
+ Act now
+ Join now
+ Limited time
+ Last chance
+ Don't miss
+ Invest today
+Urgency is treated as a risk indicator rather than proof of fraud.
+C. Regulatory authority claims
+ SEBI approved
+ SEBI authorized
+ SEBI registered
+ Government approved
+The system presents these as claims that require verification rather than automatically declaring them false.
+D. URL risk signals
+ HTTP instead of HTTPS
+ IP address used as hostname
+ Sensitive or promotional URL keywords
+ Excessive subdomains
+ Unusually long URLs
+ Unusual URL characters
+The current URL analyzer examines the URL string locally and does not visit the supplied URL.
+5. Risk Engine
+The analyzers produce risk indicators. The Risk Engine converts them into an internal prototype score.
+Score
+Prototype level
+0–24
+LOW
+25–49
+MODERATE
+50–74
+HIGH
+
+InvestorShield — Final Project Concept
+Page 4
+75–100
+VERY HIGH
+Important: This is an internal risk-indicator score, not a probability of fraud and not an official SEBI classification.
+6. Explainability
+InvestorShield should explain why a result was produced instead of displaying only a numerical score.
+HIGH RISK INDICATORS
+1. Guaranteed-return language
+   Evidence: "guaranteed 30% returns"
+2. Regulatory authority claim
+   Evidence: "SEBI approved"
+3. Urgency / pressure
+   Evidence: "join our Telegram group now" 
+7. Claim Verification Layer
+Important claims are extracted and presented with a category, status, confidence, and explanation.
+Claim
+Category
+Status
+SEBI approved
+Regulatory approval
+Needs verification
+Guaranteed 30% returns
+Return guarantee
+High-risk claim indicator
+Join now
+Urgency
+Pressure indicator
+8. Safe-Action Guidance
+ Do not transfer money until important claims are independently verified.
+ Do not share OTPs, passwords, PINs, or other sensitive credentials.
+ Verify the organization or person using an official source.
+ Be cautious when the message creates urgency or pressure to act immediately.
+InvestorShield should guide the user toward safer verification rather than telling the user which investment to choose.
+9. AI / ML Roadmap
+Phase 1 — Rule-based foundation
+ Regex-based financial risk indicators
+ URL parsing
+ Claim extraction
+ Explainable scoring
+Phase 2 — NLP
+ Financial-content classification
+ Semantic claim detection
+ Context-aware risk detection
+ Improved recognition of equivalent scam patterns
+
+InvestorShield — Final Project Concept
+Page 5
+Phase 3 — ML classification
+ Educational
+ Promotional
+ Potentially deceptive
+ Scam-like / high-risk
+ Unclear
+The system should not turn an ML prediction into a definitive declaration of fraud. It should communicate uncertainty
+and explain the evidence.
+10. Regional-Language Support
+A major future enhancement is support for regional-language users, initially English and Tamil. The goal is to detect
+the same risk patterns in regional-language financial messages and explain the warnings in the user's preferred
+language.
+11. Target Users
+ First-time retail investors
+ Tier-2/3 users
+ Regional-language users
+ Senior citizens
+ People receiving investment messages on WhatsApp or Telegram
+ Users exposed to social-media investment promotions
+ People about to act on an unfamiliar investment opportunity
+12. Privacy-by-Design
+InvestorShield should not request or process unnecessary sensitive credentials.
+ OTP
+ Password
+ UPI PIN
+ Bank credentials
+ PAN
+ Aadhaar
+ Trading-account credentials
+ Private financial records
+The user only needs to provide content they want analyzed: a message, URL, or claim.
+13. What InvestorShield Will NOT Do
+ Give buy/sell/hold recommendations
+ Predict stock prices
+ Recommend specific stocks
+
+InvestorShield — Final Project Concept
+Page 6
+ Recommend brokers
+ Generate trading signals
+ Execute trades
+ Ask for OTPs, passwords, or PINs
+ Claim certainty that a message is fraudulent
+ Tell users which investment they should purchase
+14. Final Technical Architecture
+                         USER
+                           |
+                           v
+                 +-------------------+
+                 |   React Frontend  |
+                 | English / Tamil   |
+                 +---------+---------+
+                           |
+                           v
+                 +-------------------+
+                 |    FastAPI API    |
+                 +---------+---------+
+                           |
+             +-------------+-------------+
+             |             |             |
+             v             v             v
+       URL Analyzer   Text/NLP       Claim Analyzer
+                           |
+                           |
+             +-------------+-------------+
+                           |
+                           v
+                  +----------------+
+                  |   Risk Engine  |
+                  +-------+--------+
+                          |
+                          v
+                 +-------------------+
+                 | Verification      |
+                 | / Evidence Layer  |
+                 +---------+---------+
+                           |
+                           v
+                 +-------------------+
+                 | Explainable       |
+                 | Result            |
+                 | Risk / Red flags  |
+                 | Claims / Evidence |
+                 | Safe actions      |
+                 +---------+---------+
+                           |
+                           v
+                 "Pause and verify
+                    before acting.
+15. Final MVP Modules
+ Message Analyzer: detects return promises, urgency, authority claims, pressure tactics, and suspicious financial
+language.
+ URL Analyzer: analyzes URL structure and suspicious characteristics.
+ Claim Analyzer: extracts claims with category, status, confidence, and explanation.
+ Risk Engine: combines indicators into an internal risk level.
+ Evidence / Verification Layer: future integration with trusted public sources.
+
+InvestorShield — Final Project Concept
+Page 7
+ Safe-Action Engine: provides practical steps before acting.
+ Regional Language Layer: initially English and Tamil.
+ ML/NLP Layer: future context-aware financial-content classification.
+16. Recommended Hackathon Demo
+The strongest demo is one complete user journey. Start with a realistic suspicious investment message and show
+how InvestorShield moves from detection to explanation to safer action.
+1. User pastes:
+   "SEBI approved investment opportunity.
+    Guaranteed 30% returns every month.
+    Join our Telegram group now."
+2. InvestorShield detects:
+   - Guaranteed returns
+   - Regulatory authority claim
+   - Urgency
+3. Risk result:
+   HIGH — 60/100
+4. Claims are extracted and explained.
+5. User checks the suspicious URL.
+6. URL risk indicators are displayed.
+7. InvestorShield recommends:
+   "Pause. Verify independently before transferring money."
+8. Official verification/reporting resources are shown.
+17. Final Project Positioning
+ InvestorShield
+ An AI-assisted pre-action safety layer for retail investors that detects and explains
+potential scam and misinformation indicators in financial messages, claims and URLs,
+helping users pause, verify and make safer decisions.
+The project is designed around investor resilience rather than investment advice. Its purpose is to help users
+recognize warning signs, understand uncertainty, verify important claims, and avoid acting under pressure.
+18. Current Implementation Status
+Component
+Status
+FastAPI backend
+Working
+Text risk analyzer
+Working
+Claim analyzer
+Working
+Risk engine
+Working
+URL analyzer
+Working
+URL → FastAPI integration
+Next / in progress
+React frontend
+Next phase
+
+InvestorShield — Final Project Concept
+Page 8
+Component
+Status
+Official-source verification
+Future enhancement
+NLP / ML
+Future enhancement
+English / Tamil UI
+Future enhancement
