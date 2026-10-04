@@ -184,13 +184,13 @@ function App() {
 
       {result && (
         <div className="space-y-6 animate-in fade-in slide-in-from-bottom-4 duration-500">
-          <div className={`p-6 rounded-xl border-2 flex items-center justify-between ${getRiskColor(result.level)}`}>
+          <div className={`p-6 rounded-xl border-2 flex items-center justify-between ${getRiskColor(result.risk_level)}`}>
             <div>
               <h2 className="text-lg font-bold mb-1">{currentT.riskLevel}</h2>
-              <p className="text-3xl font-black">{getRiskTranslation(result.level)}</p>
+              <p className="text-3xl font-black">{getRiskTranslation(result.risk_level)}</p>
             </div>
             <div className="text-right">
-              <span className="text-4xl font-bold">{result.score}</span>
+              <span className="text-4xl font-bold">{result.risk_score}</span>
               <span className="text-xl opacity-75">/100</span>
             </div>
           </div>
@@ -228,7 +228,7 @@ function App() {
                     {result.claims.map((claim, i) => (
                       <li key={i} className="border-b border-gray-100 last:border-0 pb-4 last:pb-0">
                         <div className="flex justify-between items-start">
-                          <span className="font-semibold text-gray-800">"{claim.text}"</span>
+                          <span className="font-semibold text-gray-800">"{claim.claim}"</span>
                         </div>
                         <div className="flex gap-2 mt-2">
                           <span className="text-xs px-2 py-1 bg-gray-100 text-gray-600 rounded">
