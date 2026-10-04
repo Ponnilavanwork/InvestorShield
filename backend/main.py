@@ -88,6 +88,20 @@ def analyze_content(request: AnalysisRequest):
         # Step 4: Add claim analysis
         result["claims"] = claims
 
+        # Step 4.5: Check for explicit URLs in the message
+        import re
+        url_match = re.search(r'https?://[^\s]+|www\.[^\s]+', request.content)
+        if url_match:
+            extracted_url = url_match.group(0)
+            url_analysis = analyze_url(extracted_url)
+            # Combine indicators and increase score based on URL
+            result["indicators"].extend(url_analysis["indicators"])
+            result["risk_score"] = min(100, result["risk_score"] + url_analysis["score"])
+            # Recalculate level and summary
+            from engine.risk_engine import calculate_risk, generate_summary
+            result["risk_level"] = calculate_risk(result["risk_score"])
+            result["summary"] = generate_summary(result["risk_level"], result["indicators"])
+
         # Step 5: Return the complete result
         return {
             "input_type": request.input_type,

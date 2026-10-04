@@ -49,7 +49,13 @@ def analyze_url(url):
                     "severity": "medium",
                     "evidence": "Unable to safely parse the URL."
                 }
-            ]
+            ],
+            "url_details": {
+                "scheme": "",
+                "hostname": "",
+                "path": "",
+                "has_query": False
+            }
         }
 
     if not hostname:
@@ -62,7 +68,13 @@ def analyze_url(url):
                     "severity": "medium",
                     "evidence": "The URL does not contain a valid hostname."
                 }
-            ]
+            ],
+            "url_details": {
+                "scheme": scheme if 'scheme' in locals() else "",
+                "hostname": "",
+                "path": "",
+                "has_query": False
+            }
         }
 
     hostname = hostname.lower()
